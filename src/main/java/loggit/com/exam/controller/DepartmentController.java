@@ -4,9 +4,8 @@ import loggit.com.exam.entity.Department;
 import loggit.com.exam.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +17,17 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @GetMapping
-    private List<Department> getAllDepartments() {
-        return departmentService.getAllDepartments();
+    private ResponseEntity<List<Department>> getAllDepartments() {
+        return ResponseEntity.ok(departmentService.getAllDepartments());
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<Department> getDepartmentById(@PathVariable int id) {
+        Department department = departmentService.getDepartmentById(id);
+        if (department != null) {
+            return ResponseEntity.ok(department);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
