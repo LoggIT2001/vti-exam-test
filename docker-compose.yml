@@ -1,0 +1,13 @@
+
+services:
+  mysql-vti-exam:
+    image: mysql:8.0
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: "exam_test"
+      MYSQL_ROOT_PASSWORD: "123456"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - keycloak-network
