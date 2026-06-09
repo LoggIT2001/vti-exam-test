@@ -9,5 +9,3 @@ services:
       MYSQL_ROOT_PASSWORD: "123456"
     volumes:
       - mysql-data:/var/lib/mysql
-    networks:
-      - keycloak-network
